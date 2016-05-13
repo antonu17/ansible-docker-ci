@@ -1,0 +1,6 @@
+{
+  "source": {
+    "check": "/xxx/check",
+    "script": "/xxx/script"
+  }
+}

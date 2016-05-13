@@ -1,0 +1,35 @@
+# Get latest pip
+pip
+
+# Pyhon Setup tools
+setuptools
+
+# cryptography 
+cryptography
+
+# used by dig lookup
+dnspython
+
+# Ansible
+simplejson
+
+# AWS python boto
+boto
+
+# AWS python boto3
+boto3
+
+# Easier way to do command line argument
+docopt
+
+# Use for callback stuff
+tabulate
+
+# Jenkins API
+jenkinsapi
+
+# mandrill API
+mandrill
+
+# Ansible logging callback
+elasticsearch

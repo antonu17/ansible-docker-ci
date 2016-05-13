@@ -1,0 +1,5 @@
+##
+## Take $1 path in json
+function parse_json {
+    jq -r "$1" < $payload
+}
