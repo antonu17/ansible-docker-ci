@@ -1,0 +1,15 @@
+source 'https://rubygems.org'
+
+group :production do
+  gem 'test-kitchen'
+  gem 'kitchen-vagrant'
+  gem 'kitchen-ec2'
+  gem 'kitchen-ansiblepush'
+  gem 'kitchen-goss'
+  gem 'kitchen-localhost'
+  gem 'net-ssh', '~> 2.0'
+  gem 'kitchen-docker'
+  gem 'bundler'
+  gem 'faraday'
+  gem "jmespath"
+end

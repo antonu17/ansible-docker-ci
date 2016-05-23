@@ -1,17 +1,8 @@
 # Get latest pip
 pip
 
-# Pyhon Setup tools
-setuptools
-
-# cryptography 
-cryptography
-
 # used by dig lookup
 dnspython
-
-# Ansible
-simplejson
 
 # AWS python boto
 boto
@@ -25,11 +16,10 @@ docopt
 # Use for callback stuff
 tabulate
 
-# Jenkins API
-jenkinsapi
-
 # mandrill API
 mandrill
 
 # Ansible logging callback
 elasticsearch
+
+ansible

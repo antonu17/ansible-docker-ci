@@ -6,7 +6,7 @@ SETUP_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd $SETUP_DIR
 
 # Current Version
-version="0.0.7-rc-6"
+version="0.2.0"
 # We use quay
 DOCKER_REG="quay.io"
 DOCKER_ORG="hellofresh"
@@ -23,6 +23,7 @@ echo ""
 #echo ""
 
 echo "******* PUSHING *******"
+echo "   ${DOCKER_STRING}"
 docker push ${DOCKER_STRING}
 
 exit 0

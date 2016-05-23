@@ -1,46 +1,34 @@
-FROM quay.io/hellofresh/hf-baseimage
-MAINTAINER Adham Helal <aa@hellofresh.com>
+FROM alpine
 
-ENV DEBIAN_FRONTEND=noninteractive
+RUN apk add --update \
+  ruby \
+  perl \
+  jq \
+  git \
+  openssh-client \
+  ruby-json \
+  ruby-io-console 
+RUN gem install octokit httpclient --no-rdoc --no-ri
 
-# Install python openssh and curl for test-kitchen
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y software-properties-common python python-setuptools git
+RUN echo "===> Adding Python runtime..."  && \
+    apk --update add python py-pip openssl ca-certificates    && \
+    apk --update add --virtual build-dependencies \
+                python-dev libffi-dev openssl-dev build-base  && \
+    pip install --upgrade pip cffi                            && \
+    \
+    \
+    echo "===> Installing Ansible..."  && \
+    pip install ansible                && \
+    \
+    \
+    echo "===> Removing package list..."  && \
+    apk del build-dependencies            && \
+    rm -rf /var/cache/apk/*
 
-# ENV for ansible setup
-ENV SETUP_INSTALL_RUBY              "yes"
-ENV SETUP_RUBY_CUSTOM_REPO_INSTALL  "yes"
-ENV SETUP_RUBY_VERSION              "ruby2.1"
+COPY ./python_requirements.txt /opt/python_requirements.txt
+RUN pip install -r /opt/python_requirements.txt
 
-RUN echo "%superuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-RUN groupadd superuser
-RUN useradd ansible -m -G superuser
+#  Ruby
+COPY ./Gemfile_requirments.txt /opt/Gemfile_requirments.txt
+RUN /usr/bin/gem install --no-ri --no-rdoc -g /opt/Gemfile_requirments.txt
 
-COPY ./python_requirements.txt /home/ansible/python_requirements.txt
-COPY ./setup.sh /home/ansible/setup.sh
-
-# Install ansible
-USER ansible
-ENV USER ansible
-RUN bash -x /home/ansible/setup.sh
-USER root
-
-# Install bundler
-RUN /usr/bin/gem install bundler
-
-# Add Concurse resource
-ADD http://stedolan.github.io/jq/download/linux64/jq /usr/local/bin/jq
-COPY bin/check  /opt/resource/check
-COPY bin/in     /opt/resource/in
-COPY bin/out    /opt/resource/out
-COPY bin/helper /opt/resource/helper
-
-# Add JQ to parse JSON easier
-RUN chmod +x /usr/local/bin/jq /opt/resource/out /opt/resource/in /opt/resource/check
-
-# Update to security package
-RUN apt-get update && apt-get -y -o Dpkg::Options::="--force-confdef" \
-    dist-upgrade
-
-# Cleanup APT.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
