@@ -1,3 +1,4 @@
+# Nothing 
 source 'https://rubygems.org'
 
 group :production do
@@ -12,4 +13,6 @@ group :production do
   gem 'bundler'
   gem 'faraday'
   gem "jmespath"
+  gem "net-scp"
+  gem "aws-sdk-resources"  
 end
