@@ -1,5 +1,13 @@
 FROM alpine
 
+
+COPY ./python_requirements.txt /opt/python_requirements.txt
+COPY ./VERSION /
+COPY ./VERSION_NAME /
+COPY ./Gemfile_requirements.txt /opt/Gemfile
+COPY ./Gemfile.lock /opt/Gemfile.lock
+
+
 RUN apk add --update \
     ruby \
     perl \
@@ -14,22 +22,16 @@ RUN apk add --update \
     pip install --upgrade pip cffi                            && \
     \
     \
-    echo "===> Installing Ansible..."  && \
-    pip install ansible                && \
+    echo "===> Installing Ansible and python ..."  && \
+    pip install -r /opt/python_requirements.txt && \
+    \
+    \
+    echo "===> Installing Ruby stuff ..."  && \
+    /usr/bin/gem install --no-ri --no-rdoc bundler && \
+    echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
+    cd /opt/ && bundle install  && \
     \
     \
     echo "===> Removing package list..."  && \
     apk del build-dependencies            && \
     rm -rf /var/cache/apk/*
-
-COPY ./python_requirements.txt /opt/python_requirements.txt
-RUN pip install -r /opt/python_requirements.txt
-
-COPY ./VERSION /
-
-#  Ruby
-COPY ./Gemfile_requirements.txt /opt/Gemfile
-COPY ./Gemfile.lock /opt/Gemfile.lock
-RUN /usr/bin/gem install --no-ri --no-rdoc bundler && \
-    echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
-    cd /opt/ && bundle install
