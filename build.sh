@@ -6,22 +6,16 @@ SETUP_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd $SETUP_DIR
 
 # Current Version
-version="$(cat Version)"
+version="$(cat VERSION)"
 # We use quay
-DOCKER_REG="quay.io"
-DOCKER_ORG="hellofresh"
-DOCKER_IMAGE="ci-ansible"
+version_name="$(cat VERSION_NAME)"
 
-DOCKER_VERSION="${DOCKER_REG}/${DOCKER_ORG}/${DOCKER_IMAGE}:${version}"
-DOCKER_LATEST="${DOCKER_REG}/${DOCKER_ORG}/${DOCKER_IMAGE}:latest"
+DOCKER_VERSION="${version_name}:${version}"
+DOCKER_LATEST="${version_name}:latest"
 
 echo "******* BUILDING *******"
 docker build --no-cache=True -t ${DOCKER_VERSION} -t ${DOCKER_LATEST} -f Dockerfile .
 echo ""
-
-#echo "******* TESTING *******"
-#bundle exec rspec
-#echo ""
 
 echo "******* PUSHING *******"
 echo "   ${DOCKER_VERSION}"
