@@ -1,5 +1,4 @@
-# Get latest pip
-pip
+cffi
 
 # used by dig lookup
 dnspython
@@ -23,3 +22,4 @@ mandrill
 elasticsearch
 
 ansible==2.0.2.0
+
