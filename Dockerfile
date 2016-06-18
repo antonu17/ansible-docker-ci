@@ -6,10 +6,9 @@ COPY ./files/VERSION_NAME /
 COPY ./files/Gemfile /opt/Gemfile
 COPY ./files/Gemfile.lock /opt/Gemfile.lock
 
-#    jq
+#    jq perl 
 RUN apk add --update \
     ruby \
-    perl \
     git \
     openssh-client \
     ruby-json \
@@ -17,7 +16,7 @@ RUN apk add --update \
     apk --update add python \
                      py-pip \
                      openssl \
-                     ca-certificates &&\
+                     ca-certificates && \
     apk --update add --virtual \
                      build-dependencies \
                      python-dev \ 
@@ -35,7 +34,7 @@ RUN apk add --update \
     /usr/bin/gem install --no-ri --no-rdoc bundler && \
     echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
     cd /opt/ &&\
-    bundle install --path /root/bundler_gems &&\
+    bundle install --path /root/bundler_gems  --clean --no-cache  &&\
     \
     \
     echo "===> Removing package list..."  && \
