@@ -6,7 +6,7 @@ COPY ./files/VERSION_NAME /
 COPY ./files/Gemfile /opt/Gemfile
 COPY ./files/Gemfile.lock /opt/Gemfile.lock
 
-#    jq perl 
+# perl 
 RUN apk add --update \
     ruby \
     git \
@@ -16,6 +16,7 @@ RUN apk add --update \
     apk --update add python \
                      py-pip \
                      openssl \
+                     jq \
                      ca-certificates && \
     apk --update add --virtual \
                      build-dependencies \
