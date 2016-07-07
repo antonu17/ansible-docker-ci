@@ -4,7 +4,6 @@ COPY ./files/python_requirements.txt /opt/python_requirements.txt
 COPY ./files/VERSION /
 COPY ./files/VERSION_NAME /
 COPY ./files/Gemfile /opt/Gemfile
-COPY ./files/Gemfile.lock /opt/Gemfile.lock
 
 # perl 
 RUN apk add --update \
@@ -13,12 +12,12 @@ RUN apk add --update \
     openssh-client \
     ruby-json \
     ruby-io-console && \
-    apk --update add python \
+    apk --no-cache add python \
                      py-pip \
                      openssl \
                      jq \
                      ca-certificates && \
-    apk --update add --virtual \
+    apk --no-cache add --virtual \
                      build-dependencies \
                      python-dev \ 
                      libffi-dev \
