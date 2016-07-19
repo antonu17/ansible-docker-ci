@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-build_image = false
+build_image = true
 image_id="6630ab15b473"
 #image_id=false
 IMAGE_TAG="dev"
