@@ -4,6 +4,7 @@ COPY ./files/python_requirements.txt /opt/python_requirements.txt
 COPY ./files/VERSION /
 COPY ./files/VERSION_NAME /
 COPY ./files/Gemfile /opt/Gemfile
+COPY ./files/syntax-checks.py /usr/local/bin/syntax-checks.py
 
 # perl 
 RUN apk add --update \
@@ -23,6 +24,8 @@ RUN apk add --update \
                      libffi-dev \
                      openssl-dev \
                      build-base &&\
+    \
+    chmod +x /usr/local/bin/syntax-checks.py && \
     \
     echo "===> Installing Ansible and python ..."  && \ 
     mkdir /tmp/python && \
