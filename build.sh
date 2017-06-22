@@ -15,7 +15,7 @@ DOCKER_VERSION="${version_name}:${version}"
 DOCKER_LATEST="${version_name}:latest"
 
 echo "******* BUILDING *******"
-docker build --no-cache=True -t ${DOCKER_VERSION} -t ${DOCKER_LATEST} -f Dockerfile .
+docker build -t ${DOCKER_VERSION} -t ${DOCKER_LATEST} -f Dockerfile .
 echo ""
 
 echo "******* PUSHING ${DOCKER_VERSION} *******"
