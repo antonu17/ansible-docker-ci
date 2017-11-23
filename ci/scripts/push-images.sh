@@ -7,8 +7,8 @@ if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; th
   [ -n "$(grep "^${VERSION}" <<< "$CHANGES")" ] && BUILD_REQUIRED=1
 
   if [[ -n "${BUILD_REQUIRED}" ]]; then
-    docker login -u="${QUAY_USER}" -p="${QUAY_PASS}" quay.io
-    docker push ${IMAGE}:${VERSION}
+    echo docker login -u="${QUAY_USER}" -p="${QUAY_PASS}" quay.io
+    echo docker push ${IMAGE}:${VERSION}
   else
     echo "Version ${VERSION} wasn't changed. Not pushing."
   fi
