@@ -24,7 +24,8 @@ RUN apk add --update \
                      python-dev \
                      libffi-dev \
                      openssl-dev \
-                     build-base &&\
+                     build-base \
+                     ruby-dev &&\
     \
     chmod +x /usr/local/bin/syntax-checks.py && \
     \
@@ -38,7 +39,8 @@ RUN apk add --update \
     echo "===> Installing Ruby stuff ..."  && \
     /usr/bin/gem install --no-ri --no-rdoc bundler && \
     echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
-    cd /opt/ &&\
+    cd /opt/ && \
+    #bundle update net-ssh && \
     bundle install --path /root/bundler_gems  --clean --no-cache  &&\
     \
     \
@@ -51,4 +53,3 @@ RUN apk add --update \
     rm -rf /var/cache/apk/* &&\
     rm -rf /root/.cache/ &&\
     rm -rf /tmp/python
-
