@@ -29,7 +29,7 @@ RUN apk add --update \
     chmod +x /usr/local/bin/syntax-checks.py && \
     \
     echo "===> Installing Ansible and python ..."  && \
-
+    \
     mkdir /tmp/python && \
     pip install --upgrade --build /tmp/python pip && \
     pip install --upgrade --build /tmp/python -r /opt/python_requirements.txt && \

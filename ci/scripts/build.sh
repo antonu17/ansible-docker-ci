@@ -17,9 +17,14 @@ fi
 
 docker build -t ${IMAGE}:${VERSION} ${VERSION}/
 
-if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then
+if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ "$TRAVIS_BRANCH" == "master" ]]; then
   docker login -u="${QUAY_USER}" -p="${QUAY_PASS}" quay.io
   docker push ${IMAGE}:${VERSION}
+
+  if [[ "$LATEST_VERSION" == "true" ]]; then
+    docker tag ${IMAGE}:${VERSION} ${IMAGE}:latest
+    docker push ${IMAGE}:latest
+  fi
 else
   echo "Pull request build, don't push images"
 fi
