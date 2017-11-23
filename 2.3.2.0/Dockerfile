@@ -39,7 +39,6 @@ RUN apk add --update \
     /usr/bin/gem install --no-ri --no-rdoc bundler && \
     echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
     cd /opt/ && \
-    #bundle update net-ssh && \
     bundle install --path /root/bundler_gems  --clean --no-cache  &&\
     \
     \

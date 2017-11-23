@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 if [[ ! "${TRAVIS}" ]]; then
   echo "This script should be only run from travis-ci. Exiting."
@@ -15,11 +15,11 @@ if [[ -z ${BUILD_REQUIRED} ]]; then
   exit 0
 fi
 
-echo docker build -t ${IMAGE}:${VERSION} ${VERSION}/
+docker build -t ${IMAGE}:${VERSION} ${VERSION}/
 
 if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then
-  echo docker login -u="${QUAY_USER}" -p="${QUAY_PASS}" quay.io
-  echo docker push ${IMAGE}:${VERSION}
+  docker login -u="${QUAY_USER}" -p="${QUAY_PASS}" quay.io
+  docker push ${IMAGE}:${VERSION}
 else
   echo "Pull request build, don't push images"
 fi
