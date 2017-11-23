@@ -1,3 +1,4 @@
 #!/bin/bash
 
-[[ $TRAVIS_PULL_REQUEST == "1" ]] && ci/scripts/build-pr.sh
+ci/scripts/build-images.sh
+[[ $TRAVIS_PULL_REQUEST -ne "1" ]] && ci/scripts/push-images.sh
