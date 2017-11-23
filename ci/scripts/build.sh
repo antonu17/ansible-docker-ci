@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -ex
 
-ci/scripts/build-images.sh
-[[ $TRAVIS_PULL_REQUEST -ne "1" ]] && ci/scripts/push-images.sh
+#ci/scripts/build-images.sh
+[[ -n ${TRAVIS_PULL_REQUEST} ]] && ci/scripts/push-images.sh
