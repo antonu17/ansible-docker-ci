@@ -6,7 +6,6 @@ COPY ./files/VERSION_NAME /
 COPY ./files/Gemfile /opt/Gemfile
 COPY ./files/syntax-checks.py /usr/local/bin/syntax-checks.py
 
-# perl
 RUN apk add --update \
     ruby \
     git \
@@ -40,7 +39,6 @@ RUN apk add --update \
     /usr/bin/gem install --no-ri --no-rdoc bundler && \
     echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
     cd /opt/ && \
-    #bundle update net-ssh && \
     bundle install --path /root/bundler_gems  --clean --no-cache  &&\
     \
     \
