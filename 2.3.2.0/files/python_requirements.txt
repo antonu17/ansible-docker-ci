@@ -1,0 +1,27 @@
+cffi
+
+# used by dig lookup
+dnspython
+
+# AWS python boto
+boto
+
+# AWS python boto3
+boto3
+
+# Easier way to do command line argument
+docopt
+
+# Use for callback stuff
+tabulate
+
+# mandrill API
+mandrill
+
+# Ansible logging callback
+elasticsearch
+
+ansible==2.3.2.0
+
+# required by ipaddr filter
+netaddr

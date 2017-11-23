@@ -3,7 +3,7 @@ language: bash
 services: docker
 env:
 - VERSION: 2.2.1.0
-#- VERSION: 2.3.2.0
+- VERSION: 2.3.2.0
 
 before_script:
 - env | sort
@@ -11,4 +11,4 @@ before_script:
 - IMAGE="quay.io/antonu17/ansible-ci"
 
 script:
-- travis_retry docker build -t "${IMAGE}:${VERSION}" .
+- [ $TRAVIS_PULL_REQUEST = 1 ] && ci/scripts/build-pr.sh
