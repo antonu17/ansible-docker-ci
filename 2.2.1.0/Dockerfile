@@ -6,7 +6,6 @@ COPY ./files/VERSION_NAME /
 COPY ./files/Gemfile /opt/Gemfile
 COPY ./files/syntax-checks.py /usr/local/bin/syntax-checks.py
 
-# perl
 RUN apk add --update \
     ruby \
     git \
