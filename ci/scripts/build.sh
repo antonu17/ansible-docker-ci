@@ -17,7 +17,7 @@ fi
 
 echo docker build -t ${IMAGE}:${VERSION} ${VERSION}/
 
-if [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
+if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then
   echo docker login -u="${QUAY_USER}" -p="${QUAY_PASS}" quay.io
   echo docker push ${IMAGE}:${VERSION}
 else
